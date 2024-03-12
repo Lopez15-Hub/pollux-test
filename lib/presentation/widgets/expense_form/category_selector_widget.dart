@@ -8,12 +8,13 @@ import 'package:pollux_test/presentation/widgets/expense_form/custom_dropdown_wi
 class CategorySelector extends StatelessWidget {
   const CategorySelector({
     super.key,
+    this.defaultValue = "null",
   });
-
+  final String? defaultValue;
   @override
   Widget build(BuildContext context) {
     final inputCaptureCubit = BlocProvider.of<InputCaptureCubit>(context);
-    inputCaptureCubit.record("category", "null");
+    inputCaptureCubit.record("category", defaultValue ?? "null");
     return Padding(
       padding: const EdgeInsets.all(10),
       child: BlocBuilder<CategoryBloc, CategoryState>(
@@ -38,7 +39,8 @@ class CategorySelector extends StatelessWidget {
                         label: "Categoría",
                         onChanged: (value) =>
                             inputCaptureCubit.record("category", value),
-                        currentValue: inputCaptureState["category"],
+                        currentValue:
+                            defaultValue ?? inputCaptureState["category"],
                         entries: [
                           const DropdownMenuItem(
                             value: "null",

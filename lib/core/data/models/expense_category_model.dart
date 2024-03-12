@@ -2,7 +2,7 @@ import 'package:pollux_test/core/data/adapters/model_adapter.dart';
 
 
 class ExpenseCategory extends ModelAdapter<ExpenseCategory> {
-  final int id;
+  final int? id;
   final String name;
   final int color;
   ExpenseCategory({this.name = "", this.color = 0, this.id = 0})

@@ -42,6 +42,7 @@ class Bills extends StatelessWidget {
             child: Column(
               children: [
                 BillsPieChart(bills: state.bills),
+                const Divider(),
                 BillList(expense: state.bills),
               ],
             ),

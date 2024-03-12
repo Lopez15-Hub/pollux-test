@@ -45,7 +45,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     });
     on<DeleteCategoryRequested>((event, emit) async {
       try {
-        await repository.model.deleteOne(event.category.id);
+        await repository.model.deleteOne(event.category.id!);
         emit(CategoryDeleted(event.category));
         add(ReadCategoriesRequested());
       } catch (error) {

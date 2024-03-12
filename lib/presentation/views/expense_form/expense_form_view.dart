@@ -47,61 +47,67 @@ class ExpenseForm extends StatelessWidget {
             },
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Text(
-                      "Añadir un nuevo gasto",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 22),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        "Añadir un nuevo gasto",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 22),
+                      ),
                     ),
-                  ),
-                  Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        CustomInput(
-                          defaultValue: expenseData?.description ?? "",
-                          label: "Descripción",
-                          inputName: "description",
-                          placeholder: "Netflix",
-                          validator: (data) => data!.isEmpty
-                              ? "La descripción es requerida"
-                              : null,
-                        ),
-                        const CategorySelector(),
-                        CustomInput(
-                          type: TextInputType.number,
-                          defaultValue: expenseData?.amount.toString() ?? "",
-                          label: "Monto",
-                          inputName: "amount",
-                          placeholder: "4.200",
-                          validator: (data) =>
-                              data!.isEmpty ? "Especifique un precio" : null,
-                        ),
-                        BlocBuilder<InputCaptureCubit, Map<String, dynamic>>(
-                          builder: (context, state) {
-                            return CustomElevatedButton(
-                              title: expenseData != null
-                                  ? "Editar gasto"
-                                  : "Añadir gasto",
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  expenseData != null
-                                      ? billsBloc.add(EditExpenseRequested(
-                                          expenseData!.id, state, expenseData!))
-                                      : billsBloc
-                                          .add(CreateExpenseRequested(state));
-                                }
-                              },
-                            );
-                          },
-                        )
-                      ],
+                    Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          CustomInput(
+                            defaultValue: expenseData?.description ?? "",
+                            label: "Descripción",
+                            inputName: "description",
+                            placeholder: "Netflix",
+                            validator: (data) => data!.isEmpty
+                                ? "La descripción es requerida"
+                                : null,
+                          ),
+                          CategorySelector(
+                              defaultValue:
+                                  expenseData?.category.id.toString()),
+                          CustomInput(
+                            type: TextInputType.number,
+                            defaultValue: expenseData?.amount.toString() ?? "",
+                            label: "Monto",
+                            inputName: "amount",
+                            placeholder: "4.200",
+                            validator: (data) =>
+                                data!.isEmpty ? "Especifique un precio" : null,
+                          ),
+                          BlocBuilder<InputCaptureCubit, Map<String, dynamic>>(
+                            builder: (context, state) {
+                              return CustomElevatedButton(
+                                title: expenseData != null
+                                    ? "Editar gasto"
+                                    : "Añadir gasto",
+                                onPressed: () {
+                                  if (formKey.currentState!.validate()) {
+                                    expenseData != null
+                                        ? billsBloc.add(EditExpenseRequested(
+                                            expenseData!.id,
+                                            state,
+                                            expenseData!))
+                                        : billsBloc
+                                            .add(CreateExpenseRequested(state));
+                                  }
+                                },
+                              );
+                            },
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );

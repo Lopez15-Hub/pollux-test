@@ -45,69 +45,71 @@ class CategoryForm extends StatelessWidget {
         },
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  "Añadir nueva categoría",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 22),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    "Añadir nueva categoría",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22),
+                  ),
                 ),
-              ),
-              Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    CustomInput(
-                      defaultValue: categoryData?.name ?? "",
-                      label: "Nombre",
-                      inputName: "name",
-                      placeholder: "Subscripciones",
-                      validator: (data) =>
-                          data!.isEmpty ? "El nombre es requerido" : null,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: ElevatedButton(
-                          onPressed: () => colorPickerCubit
-                                  .showColorPicker(context, (color) {
-                                inputCaptureCubit.state["color"] = color?.value;
-                              }),
-                          child: const Row(
-                            children: [
-                              Icon(Icons.color_lens),
-                              Text("Elegir color"),
-                            ],
-                          )),
-                    ),
-                    BlocBuilder<InputCaptureCubit, Map<String, dynamic>>(
-                      builder: (context, state) {
-                        return CustomElevatedButton(
-                          title: categoryData != null
-                              ? "Editar categoría"
-                              : "Añadir categoría",
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              if (state["color"] == null) {
-                                snackbarCubit.show(context,
-                                    "Especifica un color", SnackbarType.error);
-                              } else {
-                                categoryData != null
-                                    ? categoryBloc.add(EditCategoryRequested(
-                                        categoryData!.id, state, categoryData!))
-                                    : categoryBloc
-                                        .add(CreateCategoryRequested(state));
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      CustomInput(
+                        defaultValue: categoryData?.name ?? "",
+                        label: "Nombre",
+                        inputName: "name",
+                        placeholder: "Subscripciones",
+                        validator: (data) =>
+                            data!.isEmpty ? "El nombre es requerido" : null,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 20),
+                        child: ElevatedButton(
+                            onPressed: () => colorPickerCubit
+                                    .showColorPicker(context, (color) {
+                                  inputCaptureCubit.state["color"] = color?.value;
+                                }),
+                            child: const Row(
+                              children: [
+                                Icon(Icons.color_lens),
+                                Text("Elegir color"),
+                              ],
+                            )),
+                      ),
+                      BlocBuilder<InputCaptureCubit, Map<String, dynamic>>(
+                        builder: (context, state) {
+                          return CustomElevatedButton(
+                            title: categoryData != null
+                                ? "Editar categoría"
+                                : "Añadir categoría",
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                if (state["color"] == null) {
+                                  snackbarCubit.show(context,
+                                      "Especifica un color", SnackbarType.error);
+                                } else {
+                                  categoryData != null
+                                      ? categoryBloc.add(EditCategoryRequested(
+                                          categoryData!.id!, state, categoryData!))
+                                      : categoryBloc
+                                          .add(CreateCategoryRequested(state));
+                                }
                               }
-                            }
-                          },
-                        );
-                      },
-                    )
-                  ],
+                            },
+                          );
+                        },
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

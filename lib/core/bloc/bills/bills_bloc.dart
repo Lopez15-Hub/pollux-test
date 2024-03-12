@@ -33,7 +33,7 @@ class BillsBloc extends Bloc<BillsEvent, BillsState> {
                 amount: expense.amount,
                 category: category ??
                     ExpenseCategory(
-                      id: -5,
+                      id: null,
                       name: "Sin categoría",
                     ),
                 description: expense.description);
@@ -84,7 +84,7 @@ class BillsBloc extends Bloc<BillsEvent, BillsState> {
     });
     on<DeleteBillsByCategoryRequested>((event, emit) async {
       try {
-        await repository.removeByCategory(event.category.id);
+        await repository.removeByCategory(event.category.id!);
         emit(BillsRemoved(event.category));
         add(ReadBillsRequested());
       } catch (error) {
