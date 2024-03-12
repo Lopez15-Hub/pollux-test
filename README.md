@@ -1,5 +1,4 @@
-# Documentación Técnica Tenis App
-
+# Documentación Técnica Finance App
 ## Prueba para puesto de Fullstack developer
 
 ## Inicio rápido
