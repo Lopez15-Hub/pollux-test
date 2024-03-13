@@ -1,5 +1,5 @@
 # Documentación Técnica Finance App
-## Prueba para puesto de Fullstack developer
+## Prueba para puesto de Flutter developer
 
 ## Inicio rápido
 
