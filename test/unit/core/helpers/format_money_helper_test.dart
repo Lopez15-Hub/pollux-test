@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pollux_test/core/helpers/format_amount_helper.dart';
 import 'package:pollux_test/core/helpers/format_money_helper.dart';
 
 void main() {
