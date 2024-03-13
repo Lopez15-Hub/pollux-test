@@ -46,6 +46,12 @@ Un repositorio es la capa de intercambio entre los servicios externos y la capa 
 
 - helpers: Son funciones de fácil acceso. Diseñadas para simplificar código y facilitar la implementación de procedimientos especificos.
 
+## Respecto a tests
+
+Las pruebas unitarias de este proyecto están disponibles en la carpeta test que se encuentra en la raíz de este proyecto.
+
+
 ## Enlaces externos
+
 
 Guía utilizada en la arquitectura del proyecto: https://bloclibrary.dev/#/architecture
