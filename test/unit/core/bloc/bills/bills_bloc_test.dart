@@ -16,7 +16,7 @@ void main() {
       expect(billsBloc.state, isA<BillsInitial>());
     });
   });
-  group("0000_test_ReadBillsRequested", () {
+  group("0001_test_ReadBillsRequested", () {
     blocTest(
       'Read bills and expect empty array',
       build: () => billsBloc,
@@ -25,7 +25,7 @@ void main() {
     );
   });
 
-  group("0001_test_DeleteExpenseRequested", () {
+  group("0002_test_DeleteExpenseRequested", () {
     final expenseMock = ExpenseResponse(
         amount: 0,
         category: ExpenseCategory(color: 0, id: 0, name: ""),
@@ -39,7 +39,7 @@ void main() {
       expect: () => [isA<ExpenseDeleted>(), isA<BillsEmpty>()],
     );
   });
-  group("0002_test_EditExpenseRequested", () {
+  group("0003_test_EditExpenseRequested", () {
     final expenseMock = ExpenseResponse(
         amount: 0,
         category: ExpenseCategory(color: 0, id: 0, name: ""),
@@ -54,7 +54,7 @@ void main() {
       expect: () => [isA<ExpenseUpdated>(), isA<BillsEmpty>()],
     );
   });
-  group("0003_test_CreateExpenseRequested", () {
+  group("0004_test_CreateExpenseRequested", () {
     blocTest(
       'Create Expense',
       build: () => billsBloc,
