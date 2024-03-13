@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pollux_test/core/bloc/bills/bills_bloc.dart';
 import 'package:pollux_test/core/bloc/navigator/navigator_cubit.dart';
 import 'package:pollux_test/presentation/views/expense_form/expense_form_view.dart';
-import 'package:pollux_test/presentation/widgets/bills/bill_list.dart';
+import 'package:pollux_test/presentation/widgets/bills/bill_list_widget.dart';
 import 'package:pollux_test/presentation/widgets/app/no_data_widget.dart';
 import 'package:pollux_test/presentation/widgets/home/pie_chart_widget.dart';
 
