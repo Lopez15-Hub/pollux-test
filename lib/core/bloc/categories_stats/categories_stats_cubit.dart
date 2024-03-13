@@ -22,8 +22,6 @@ class CategoriesStatsCubit extends Cubit<CategoriesStatsState> {
 
     final List<PieChartSectionData> sections = [];
 
-    int defaultColorIndex = 0;
-
     categoryCounts.forEach((category, count) {
       final matchingBills =
           bills.where((bill) => bill.category.name == category).toList();
