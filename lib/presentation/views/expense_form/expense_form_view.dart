@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pollux_test/core/bloc/bills/bills_bloc.dart';
 import 'package:pollux_test/core/bloc/category/category_bloc.dart';
-import 'package:pollux_test/core/bloc/input_capture/input_capture_cubit.dart';
 import 'package:pollux_test/core/bloc/navigator/navigator_cubit.dart';
 import 'package:pollux_test/core/bloc/snackbar/snackbar_cubit.dart';
 import 'package:pollux_test/core/data/enums/snackbar_type_enum.dart';
 import 'package:pollux_test/core/data/models/expense_response_model.dart';
-import 'package:pollux_test/presentation/widgets/app/custom_input_widget.dart';
 import 'package:pollux_test/presentation/widgets/app/custom_appbar_widget.dart';
-import 'package:pollux_test/presentation/widgets/app/custom_elevated_button_widget.dart';
-import 'package:pollux_test/presentation/widgets/expense_form/category_selector_widget.dart';
+import 'package:pollux_test/presentation/widgets/expense_form/expense_form_input_group_widget.dart';
 
 class ExpenseForm extends StatelessWidget {
   const ExpenseForm({super.key, this.expenseData});
@@ -18,7 +15,6 @@ class ExpenseForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    final billsBloc = BlocProvider.of<BillsBloc>(context);
     final categoryBloc = BlocProvider.of<CategoryBloc>(context);
     final snackbarCubit = BlocProvider.of<SnackbarCubit>(context);
     final navigatorCubit = BlocProvider.of<NavigatorCubit>(context);
@@ -60,51 +56,8 @@ class ExpenseForm extends StatelessWidget {
                     ),
                     Form(
                       key: formKey,
-                      child: Column(
-                        children: [
-                          CustomInput(
-                            defaultValue: expenseData?.description ?? "",
-                            label: "Descripción",
-                            inputName: "description",
-                            placeholder: "Netflix",
-                            validator: (data) => data!.isEmpty
-                                ? "La descripción es requerida"
-                                : null,
-                          ),
-                          CategorySelector(
-                              defaultValue:
-                                  expenseData?.category.id.toString()),
-                          CustomInput(
-                            type: TextInputType.number,
-                            defaultValue: expenseData?.amount.toString() ?? "",
-                            label: "Monto",
-                            inputName: "amount",
-                            placeholder: "4.200",
-                            validator: (data) =>
-                                data!.isEmpty ? "Especifique un precio" : null,
-                          ),
-                          BlocBuilder<InputCaptureCubit, Map<String, dynamic>>(
-                            builder: (context, state) {
-                              return CustomElevatedButton(
-                                title: expenseData != null
-                                    ? "Editar gasto"
-                                    : "Añadir gasto",
-                                onPressed: () {
-                                  if (formKey.currentState!.validate()) {
-                                    expenseData != null
-                                        ? billsBloc.add(EditExpenseRequested(
-                                            expenseData!.id,
-                                            state,
-                                            expenseData!))
-                                        : billsBloc
-                                            .add(CreateExpenseRequested(state));
-                                  }
-                                },
-                              );
-                            },
-                          )
-                        ],
-                      ),
+                      child: ExpenseFormInputGroup(
+                          expenseData: expenseData, formKey: formKey),
                     ),
                   ],
                 ),

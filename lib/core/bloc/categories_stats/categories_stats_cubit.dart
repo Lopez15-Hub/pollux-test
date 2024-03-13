@@ -22,13 +22,6 @@ class CategoriesStatsCubit extends Cubit<CategoriesStatsState> {
 
     final List<PieChartSectionData> sections = [];
 
-    final defaultColors = [
-      Colors.blue,
-      Colors.red,
-      Colors.yellow,
-      Colors.green,
-    ];
-
     int defaultColorIndex = 0;
 
     categoryCounts.forEach((category, count) {
@@ -36,14 +29,11 @@ class CategoriesStatsCubit extends Cubit<CategoriesStatsState> {
           bills.where((bill) => bill.category.name == category).toList();
       Color categoryColor;
 
-      if (matchingBills.isNotEmpty &&
-          matchingBills.first.category.color.isNaN) {
-        categoryColor = Color(matchingBills.first.category.color);
+      if (matchingBills.first.category.color == 0) {
+        categoryColor = Colors.grey;
       } else {
-        categoryColor = defaultColors[defaultColorIndex];
-        defaultColorIndex = (defaultColorIndex + 1) % defaultColors.length;
+        categoryColor = Color(matchingBills.first.category.color);
       }
-
       sections.add(
         PieChartSectionData(
           color: categoryColor,

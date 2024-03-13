@@ -8,6 +8,7 @@ class ColorPickerCubit extends Cubit<dynamic> {
   void showColorPicker(
       BuildContext context, void Function(Color?) onChangeColor) {
     showDialog(
+      
         context: context,
         builder: (context) {
           return CustomColorPicker(

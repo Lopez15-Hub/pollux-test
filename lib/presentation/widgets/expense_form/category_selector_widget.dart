@@ -40,7 +40,7 @@ class CategorySelector extends StatelessWidget {
                         onChanged: (value) =>
                             inputCaptureCubit.record("category", value),
                         currentValue:
-                            defaultValue ?? inputCaptureState["category"],
+                            inputCaptureState["category"] ?? defaultValue,
                         entries: [
                           const DropdownMenuItem(
                             value: "null",

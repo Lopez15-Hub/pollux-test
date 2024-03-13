@@ -30,7 +30,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       try {
         final newCategory = ExpenseCategory(
           name: event.values["name"],
-          color: event.values["color"],
+          color: int.parse(event.values["color"]),
         );
         await repository.model.create(newCategory);
         emit(CategoryCreated(recreated: event.recreate));

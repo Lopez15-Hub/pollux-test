@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pollux_test/core/bloc/bills/bills_bloc.dart';
 import 'package:pollux_test/core/bloc/navigator/navigator_cubit.dart';
 import 'package:pollux_test/core/data/models/expense_response_model.dart';
-import 'package:pollux_test/core/helpers/format_amount_helper.dart';
 import 'package:pollux_test/core/helpers/format_money_helper.dart';
 import 'package:pollux_test/presentation/views/expense_form/expense_form_view.dart';
 
